@@ -1,0 +1,84 @@
+<!-- <!DOCTYPE html>
+<html>
+  <head>
+    <title>Upload Notes</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h2>Teacher Upload Notes</h2>
+
+    <form id="uploadForm">
+      <input type="text" name="subject" placeholder="Subject" required /><br />
+      <input type="text" name="unit" placeholder="Unit" required /><br />
+      <input type="text" name="title" placeholder="Title" required /><br />
+      <input type="file" name="file" required /><br />
+      <button type="submit">Upload</button>
+    </form>
+
+    <p id="status"></p>
+
+    <script>
+      document
+        .getElementById("uploadForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+          const formData = new FormData(this);
+
+          const res = await fetch("http://127.0.0.1:8000/upload/", {
+            method: "POST",
+            body: formData,
+          });
+
+          const data = await res.json();
+          document.getElementById("status").innerText = data.message;
+        });
+    </script>
+  </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Upload Class Notes</title>
+  </head>
+  <body>
+    <h2>Upload Class Notes (PDF)</h2>
+
+    <form id="uploadForm" method="post" enctype="multipart/form-data">
+      <label for="class_id">Class ID:</label><br />
+      <input type="text" id="class_id" name="class_id" required /><br /><br />
+
+      <label for="subject_name">Subject Name:</label><br />
+      <input
+        type="text"
+        id="subject_name"
+        name="subject_name"
+        required
+      /><br /><br />
+
+      <label for="pdf_file">Select PDF File:</label><br />
+      <input
+        type="file"
+        id="pdf_file"
+        name="pdf_file"
+        accept="application/pdf"
+        required
+      /><br /><br />
+
+      <button type="submit">Upload</button>
+    </form>
+
+    <script>
+      document
+        .getElementById("uploadForm")
+        .addEventListener("submit", function (e) {
+          const classId = document.getElementById("class_id").value;
+          const subject = document.getElementById("subject_name").value;
+          this.action = `http://127.0.0.1:8000/upload/${classId}/${encodeURIComponent(
+            subject
+          )}/`;
+        });
+    </script>
+  </body>
+</html>

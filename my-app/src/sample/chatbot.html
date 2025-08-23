@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ChatBot</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h2>Ask Me</h2>
+
+    <input type="text" id="query" placeholder="Ask a question..." />
+    <button onclick="askChatbot()">Ask</button>
+
+    <p><strong>Response:</strong></p>
+    <div id="response"></div>
+
+    <script>
+      async function viewContent(noteId) {
+        const res = await fetch(`http://127.0.0.1:8000/view/${noteId}/`);
+        const data = await res.json();
+        alert(data.content);
+      }
+
+      async function askChatbot() {
+        const query = document.getElementById("query").value;
+
+        const res = await fetch("http://127.0.0.1:8000/chatbot/", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ query }),
+        });
+
+        const data = await res.json();
+
+        if (data.answer) {
+          document.getElementById("response").innerText = data.answer;
+        } else {
+          document.getElementById("response").innerText =
+            "Error: " + data.error;
+        }
+      }
+    </script>
+  </body>
+</html>

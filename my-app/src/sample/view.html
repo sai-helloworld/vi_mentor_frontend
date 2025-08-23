@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Class Notes Downloader</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 2rem;
+      }
+      input,
+      button {
+        margin: 0.5rem 0;
+        padding: 0.5rem;
+        width: 100%;
+        max-width: 300px;
+      }
+      #notesList {
+        margin-top: 1rem;
+      }
+      ul {
+        padding-left: 1rem;
+      }
+      li {
+        margin-bottom: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>📚 Download Class Notes</h2>
+    <input type="text" id="className" placeholder="Enter Class Name" />
+    <input type="text" id="subjectName" placeholder="Enter Subject Name" />
+    <button onclick="fetchNotes()">Fetch Notes</button>
+
+    <div id="notesList"></div>
+
+    <script>
+      async function fetchNotes() {
+        const className = document.getElementById("className").value.trim();
+        const subjectName = document.getElementById("subjectName").value.trim();
+        const notesList = document.getElementById("notesList");
+        notesList.innerHTML = "";
+
+        if (!className || !subjectName) {
+          notesList.textContent =
+            "❗ Please enter both class and subject names.";
+          return;
+        }
+
+        try {
+          const response = await fetch(
+            `http://127.0.0.1:8000/api/notes/?className=${className}&subjectName=${subjectName}`
+          );
+
+          if (!response.ok)
+            throw new Error(`Server responded with ${response.status}`);
+          const notes = await response.json();
+
+          if (notes.length === 0) {
+            notesList.textContent =
+              "📭 No notes found for this class and subject.";
+            return;
+          }
+          const ul = document.createElement("ul");
+          ul.style.display = "flex";
+          ul.style.flexWrap = "wrap";
+          ul.style.gap = "20px";
+          ul.style.listStyle = "none";
+          ul.style.padding = "0";
+
+          notes.forEach((note) => {
+            const li = document.createElement("li");
+            li.style.textAlign = "center";
+            li.style.width = "120px";
+
+            // Create a single link that wraps both icon and filename
+            const link = document.createElement("a");
+            link.href = `http://127.0.0.1:8000/download/${note.id}/`;
+            link.setAttribute("download", "");
+            link.style.textDecoration = "none";
+            link.style.color = "inherit";
+            link.style.display = "block";
+
+            // PDF icon
+            const icon = document.createElement("img");
+            icon.src = "https://cdn-icons-png.flaticon.com/512/337/337946.png";
+            icon.alt = "PDF icon";
+            icon.style.width = "60px";
+            icon.style.height = "60px";
+            icon.style.marginBottom = "8px";
+
+            // Filename text
+            const filename = document.createElement("div");
+            filename.textContent = note.filename;
+            filename.style.fontSize = "0.9rem";
+
+            // Wrap icon and filename inside the link
+            link.appendChild(icon);
+            link.appendChild(filename);
+            li.appendChild(link);
+            ul.appendChild(li);
+          });
+
+          notesList.appendChild(ul);
+        } catch (error) {
+          notesList.textContent = `⚠️ Failed to fetch notes: ${error.message}`;
+        }
+      }
+    </script>
+  </body>
+</html>

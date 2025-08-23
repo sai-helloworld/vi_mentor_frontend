@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Notes Portal</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h2>Available Notes</h2>
+    <ul id="notesList"></ul>
+
+    <script>
+      async function loadNotes() {
+        const res = await fetch("http://127.0.0.1:8000/notes/");
+        const notes = await res.json();
+        const list = document.getElementById("notesList");
+
+        notes.forEach((note) => {
+          const li = document.createElement("li");
+          li.textContent = `${note.subject} - ${note.unit} - ${note.title}`;
+          list.appendChild(li);
+        });
+      }
+      loadNotes();
+    </script>
+  </body>
+</html>
