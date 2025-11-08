@@ -9,13 +9,10 @@ body {
   height: 70px;
   background-color: #5161ce;
   margin: 0;
-  /* padding-top: 30px; */
 }
 #main_heading {
   align-self: center;
-  /* justify-self: flex-start; */
   margin-right: auto;
-  /* margin: 0 500px 0px 20px; */
   font-size: 4em;
   font-weight: bold;
   background: linear-gradient(90deg, #352f1a, #272727, #3f3e39);
@@ -51,12 +48,10 @@ body {
 }
 
 #navbar-animmenu ul {
-  /* margin: 10 0 0 0; */
   padding: 0 70px 0 10px;
   list-style: none;
   display: flex;
   justify-content: flex-end;
-  /* margin-right: 60px; */
 }
 
 #navbar-animmenu ul li {
@@ -67,7 +62,7 @@ body {
 
 #navbar-animmenu ul li a {
   position: relative;
-  z-index: 1; /* sits above .hori-selector */
+  z-index: 1;
   color: #000;
   padding: 15px 25px;
   display: block;
@@ -77,30 +72,28 @@ body {
 }
 
 #navbar-animmenu ul li.active a {
-  color: #5161ce; /* text turns navbar color */
+  color: #5161ce;
 }
 
 .hori-selector {
   position: absolute;
   top: 10px;
-  /* left: 0; */
   height: 100%;
   background: #000;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
   transition: all 0.2s cubic-bezier(0.68, -0.15, 0.265, 0.4);
   z-index: 0;
-  overflow: visible; /* ensures pseudo elements render properly */
+  overflow: visible;
 }
 
-/* Extra shapes (ears) */
 .hori-selector .left,
 .hori-selector .right {
   position: absolute;
   width: 50px;
   height: 25px;
   background: #000;
-  bottom: 10px; /* align with bottom of the selector */
+  bottom: 10px;
 }
 
 .hori-selector .left {
@@ -113,7 +106,6 @@ body {
   border-top-left-radius: 25px;
 }
 
-/* Masking circles pointing UP */
 .hori-selector .left:before,
 .hori-selector .right:before {
   content: "";
@@ -121,20 +113,19 @@ body {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: #5161ce; /* navbar background */
+  background: #5161ce;
 }
 
 .hori-selector .left:before {
-  top: -25px; /* shift UP, not down */
+  top: -25px;
   left: -25px;
 }
 
 .hori-selector .right:before {
-  top: -25px; /* shift UP, not down */
+  top: -25px;
   right: -25px;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   #navbar-animmenu ul {
     flex-direction: column;
@@ -156,4 +147,97 @@ body {
   .menu-toggle {
     display: none;
   }
+}
+
+/* login-page */
+.login-logout {
+  align-content: center;
+  display: absolute;
+  top: 100px;
+  left: 200px;
+  z-index: 1000000;
+  width: 50px;
+  margin-left: 20px;
+}
+.login-link,
+.logout-link {
+  color: black;
+  text-decoration: none;
+}
+.login-link:hover,
+.logout-link:hover {
+  color: white;
+}
+.login-wrapper {
+  height: 60vh;
+  width: 30vw;
+  background-color: #f5f5f5;
+  margin: auto;
+  margin-top: 100px;
+}
+.login-form {
+  position: relative;
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #888;
+}
+
+.close-btn:hover {
+  color: #000;
+}
+
+.login-form h2 {
+  margin-bottom: 20px;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.login-form button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.login-form button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+.role-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.role-buttons button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.role-buttons button:hover {
+  background-color: #0056b3;
 }

@@ -1,0 +1,228 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Create Quiz</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    label { display: block; margin-top: 10px; }
+    input, textarea, select, button { width: 100%; padding: 8px; margin-top: 5px; }
+    .success { color: green; margin-top: 10px; }
+    .error { color: red; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h2>Create a New Quiz</h2>
+  <form id="quizForm">
+    <label>Title</label>
+    <input type="text" id="title" required />
+
+    <label>Description</label>
+    <textarea id="description" required></textarea>
+
+    <label>Teacher ID</label>
+    <input type="number" id="teacher_id" required />
+
+    <label>Subject ID</label>
+    <input type="number" id="subject_id" required />
+
+    <label>Section ID</label>
+    <input type="number" id="section_id" required />
+
+    <button type="submit">Create Quiz</button>
+  </form>
+
+  <div id="response" class="success" style="display: none;"></div>
+  <div id="error" class="error" style="display: none;"></div>
+
+  <script>
+    const form = document.getElementById("quizForm");
+    const responseBox = document.getElementById("response");
+    const errorBox = document.getElementById("error");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      responseBox.style.display = "none";
+      errorBox.style.display = "none";
+
+      const payload = {
+        title: document.getElementById("title").value,
+        description: document.getElementById("description").value,
+        teacher_id: parseInt(document.getElementById("teacher_id").value),
+        subject_id: parseInt(document.getElementById("subject_id").value),
+        section_id: parseInt(document.getElementById("section_id").value),
+      };
+
+      try {
+        const res = await fetch("http://localhost:8000/api/quiz/create/", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+
+        const result = await res.json();
+
+        if (res.ok) {
+          responseBox.textContent = `✅ Quiz created! ID: ${result.quiz_id}`;
+          responseBox.style.display = "block";
+          form.reset();
+        } else {
+          errorBox.textContent = result.error || "Something went wrong.";
+          errorBox.style.display = "block";
+        }
+      } catch (err) {
+        errorBox.textContent = "Server error. Please try again.";
+        errorBox.style.display = "block";
+      }
+    });
+  </script>
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Create Quiz with Questions</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    label { display: block; margin-top: 10px; }
+    input, textarea, select, button { width: 100%; padding: 8px; margin-top: 5px; }
+    .question-block { border: 1px solid #ccc; padding: 10px; margin-top: 15px; }
+    .success { color: green; margin-top: 10px; }
+    .error { color: red; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h2>Create Quiz</h2>
+  <form id="quizForm">
+    <label>Title</label>
+    <input type="text" id="title" required />
+
+    <label>Description</label>
+    <textarea id="description" required></textarea>
+
+    <label>Teacher ID</label>
+    <input type="number" id="teacher_id" required />
+
+    <label>Subject ID</label>
+    <input type="number" id="subject_id" required />
+
+    <label>Section ID</label>
+    <input type="number" id="section_id" required />
+
+    <button type="submit">Create Quiz</button>
+  </form>
+
+  <div id="quizResponse" class="success" style="display: none;"></div>
+  <div id="quizError" class="error" style="display: none;"></div>
+
+  <div id="questionSection" style="display: none;">
+    <h3>Add Questions</h3>
+    <form id="questionForm">
+      <div class="question-block">
+        <label>Question Text</label>
+        <textarea id="qtext" required></textarea>
+
+        <label>Option A</label>
+        <input type="text" id="optA" required />
+
+        <label>Option B</label>
+        <input type="text" id="optB" required />
+
+        <label>Option C</label>
+        <input type="text" id="optC" required />
+
+        <label>Option D</label>
+        <input type="text" id="optD" required />
+
+        <label>Correct Option (A/B/C/D)</label>
+        <input type="text" id="correct" maxlength="1" required />
+      </div>
+      <button type="submit">Add Question</button>
+    </form>
+    <div id="questionResponse" class="success" style="display: none;"></div>
+    <div id="questionError" class="error" style="display: none;"></div>
+  </div>
+
+  <script>
+    let quizId = null;
+
+    document.getElementById("quizForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      document.getElementById("quizResponse").style.display = "none";
+      document.getElementById("quizError").style.display = "none";
+
+      const payload = {
+        title: document.getElementById("title").value,
+        description: document.getElementById("description").value,
+        teacher_id: parseInt(document.getElementById("teacher_id").value),
+        subject_id: parseInt(document.getElementById("subject_id").value),
+        section_id: parseInt(document.getElementById("section_id").value),
+      };
+
+      try {
+        const res = await fetch("http://localhost:8000/api/quiz/create/", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+
+        const result = await res.json();
+        if (res.ok) {
+          quizId = result.quiz_id;
+          document.getElementById("quizResponse").textContent = `✅ Quiz created! ID: ${quizId}`;
+          document.getElementById("quizResponse").style.display = "block";
+          document.getElementById("questionSection").style.display = "block";
+        } else {
+          document.getElementById("quizError").textContent = result.error || "Quiz creation failed.";
+          document.getElementById("quizError").style.display = "block";
+        }
+      } catch (err) {
+        document.getElementById("quizError").textContent = "Server error.";
+        document.getElementById("quizError").style.display = "block";
+      }
+    });
+
+    document.getElementById("questionForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      document.getElementById("questionResponse").style.display = "none";
+      document.getElementById("questionError").style.display = "none";
+
+      const payload = {
+        quiz_id: quizId,
+        text: document.getElementById("qtext").value,
+        option_a: document.getElementById("optA").value,
+        option_b: document.getElementById("optB").value,
+        option_c: document.getElementById("optC").value,
+        option_d: document.getElementById("optD").value,
+        correct_option: document.getElementById("correct").value.toUpperCase()
+      };
+
+      try {
+        const res = await fetch("http://localhost:8000/api/quiz/add-question/", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+
+        const result = await res.json();
+        if (res.ok) {
+          document.getElementById("questionResponse").textContent = `✅ Question added! ID: ${result.question_id}`;
+          document.getElementById("questionResponse").style.display = "block";
+          document.getElementById("questionForm").reset();
+        } else {
+          document.getElementById("questionError").textContent = result.error || "Failed to add question.";
+          document.getElementById("questionError").style.display = "block";
+        }
+      } catch (err) {
+        document.getElementById("questionError").textContent = "Server error.";
+        document.getElementById("questionError").style.display = "block";
+      }
+    });
+  </script>
+</body>
+</html>

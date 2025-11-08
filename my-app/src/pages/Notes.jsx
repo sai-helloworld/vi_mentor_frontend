@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import pdf_image from "../assets/pdf.png";
+import "../styles/notes.css";
+
 const Notes = () => {
   const [className, setClassName] = useState("");
   const [subjectName, setSubjectName] = useState("");
@@ -36,7 +38,7 @@ const Notes = () => {
   };
 
   return (
-    <div style={{ fontFamily: "Arial, sans-serif", padding: "2rem" }}>
+    <div class="notes_inputs_container">
       <h2>📚 Download Class Notes</h2>
 
       <input
@@ -44,12 +46,7 @@ const Notes = () => {
         placeholder="Enter Class Name"
         value={className}
         onChange={(e) => setClassName(e.target.value)}
-        style={{
-          margin: "0.5rem 0",
-          padding: "0.5rem",
-          width: "100%",
-          maxWidth: "300px",
-        }}
+        class_name="notes_class_input"
       />
 
       <input
@@ -57,39 +54,16 @@ const Notes = () => {
         placeholder="Enter Subject Name"
         value={subjectName}
         onChange={(e) => setSubjectName(e.target.value)}
-        style={{
-          margin: "0.5rem 0",
-          padding: "0.5rem",
-          width: "100%",
-          maxWidth: "300px",
-        }}
+        class="notes_subject_name"
       />
 
-      <button
-        onClick={fetchNotes}
-        style={{
-          margin: "0.5rem 0",
-          padding: "0.5rem",
-          width: "100%",
-          maxWidth: "300px",
-        }}
-      >
-        Fetch Notes
-      </button>
+      <button onClick={fetchNotes}>Fetch Notes</button>
 
-      <div id="notesList" style={{ marginTop: "1rem" }}>
+      <div>
         {message && <p>{message}</p>}
 
         {notes.length > 0 && (
-          <ul
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "20px",
-              listStyle: "none",
-              padding: "0",
-            }}
-          >
+          <ul id="notesList">
             {notes.map((note) => (
               <li key={note.id} style={{ textAlign: "center", width: "120px" }}>
                 <a

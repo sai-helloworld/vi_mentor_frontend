@@ -1,0 +1,40 @@
+.notes_inputs_container {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+}
+.notes_inputs_container > input,
+.notes_inputs_container > button {
+  background-color: black;
+  border: none;
+  margin-bottom: 20px;
+}
+.notes_inputs_container > input {
+  width: 200px;
+  border-bottom: 2px solid #5161cf;
+}
+.notes_inputs_container > button {
+  border-radius: 10px;
+  border: 1px solid grey;
+  width: 100px;
+  padding: 5px 10px;
+}
+.notes_inputs_container > button:hover {
+  background-color: white;
+  cursor: pointer;
+  color: black;
+}
+.notes_inputs_container input:focus {
+  outline: none;
+  border-bottom: 2px solid #fff; /* Optional: underline color on focus */
+}
+.notes_inputs_container > input::placeholder {
+  color: white;
+}
+#notesList {
+  /* border: solid 2px red; */
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+}

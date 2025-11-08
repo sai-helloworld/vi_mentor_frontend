@@ -9,8 +9,7 @@ const navItems = [
   { icon: "far fa-calendar-alt", label: "Quizes", path: "/quizes" },
   { icon: "far fa-chart-bar", label: "Charts", path: "/charts" },
 ];
-
-export default function AnimatedNavbar() {
+export default function AnimatedNavbar({ isAuthenticated }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const selectorRef = useRef(null);
   const itemRefs = useRef([]);
@@ -50,6 +49,17 @@ export default function AnimatedNavbar() {
             </Link>
           </li>
         ))}
+        <div className="login-logout">
+          {isAuthenticated ? (
+            <Link to="/logout" class="logout-link">
+              Logout
+            </Link>
+          ) : (
+            <Link to="/login" class="login-link">
+              Login
+            </Link>
+          )}
+        </div>
       </ul>
     </div>
   );
