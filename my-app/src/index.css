@@ -241,3 +241,32 @@ body {
 .role-buttons button:hover {
   background-color: #0056b3;
 }
+/* src/index.css */
+@keyframes float {
+  0% { transform: translateY(0px) rotateX(0deg) rotateY(0deg); }
+  50% { transform: translateY(-20px) rotateX(2deg) rotateY(-2deg); }
+  100% { transform: translateY(0px) rotateX(0deg) rotateY(0deg); }
+}
+
+.animate-float-3d {
+  animation: float 6s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+
+@keyframes grow {
+  from { height: 0; }
+  to { height: var(--h); }
+}
+
+.animate-grow-bar {
+  animation: grow 1.5s ease-out forwards;
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.4; }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s infinite;
+}

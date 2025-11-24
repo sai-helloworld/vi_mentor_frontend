@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduNexus - Next Gen Learning</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            DEFAULT: '#5161cf', // Your requested color
+                            glow: 'rgba(81, 97, 207, 0.5)',
+                            dark: '#09090b',    // Zinc 950
+                            card: '#18181b',    // Zinc 900
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Animations to replace Framer Motion */
+        body {
+            background-color: #09090b;
+            color: #f4f4f5;
+        }
+
+        /* 3D Floating Animation */
+        .float-3d {
+            animation: float 6s ease-in-out infinite;
+            transform-style: preserve-3d;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotateX(0deg) rotateY(0deg); }
+            50% { transform: translateY(-20px) rotateX(2deg) rotateY(-2deg); }
+            100% { transform: translateY(0px) rotateX(0deg) rotateY(0deg); }
+        }
+
+        /* Gentle Pulse for Glows */
+        .pulse-glow {
+            animation: pulse-slow 4s infinite;
+        }
+
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 0.4; }
+        }
+
+        /* Bar Graph Growth Animation */
+        .grow-bar {
+            animation: grow 1.5s ease-out forwards;
+        }
+
+        @keyframes grow {
+            from { height: 0; }
+            to { height: var(--h); }
+        }
+        
+        .perspective-container {
+            perspective: 1000px;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-[#5161cf] selection:text-white overflow-x-hidden">
+
+    <nav class="fixed w-full z-50 border-b border-white/10 backdrop-blur-md bg-black/30">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2 font-bold text-xl tracking-tight">
+                <div class="w-8 h-8 rounded-lg flex items-center justify-center bg-brand text-white shadow-[0_0_15px_rgba(81,97,207,0.5)]">
+                    <i class="ph ph-layers text-xl"></i>
+                </div>
+                <span>EduNexus</span>
+            </div>
+            <div class="hidden md:flex gap-8 text-sm font-medium text-zinc-400">
+                <a href="#" class="hover:text-white transition-colors">Features</a>
+                <a href="#" class="hover:text-white transition-colors">For Teachers</a>
+                <a href="#" class="hover:text-white transition-colors">For Students</a>
+            </div>
+            <button class="px-5 py-2 rounded-full text-sm font-semibold bg-brand text-white hover:opacity-90 transition-all shadow-lg shadow-brand/20">
+                Get Started
+            </button>
+        </div>
+    </nav>
+
+    <section class="relative pt-32 pb-20 px-6">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full blur-[120px] bg-brand opacity-20 pointer-events-none pulse-glow"></div>
+
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center relative z-10">
+            
+            <div class="space-y-6">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-brand/30 bg-brand/10 text-brand text-xs font-bold">
+                    <span class="relative flex h-2 w-2">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 bg-brand"></span>
+                      <span class="relative inline-flex rounded-full h-2 w-2 bg-brand"></span>
+                    </span>
+                    Next Gen Learning
+                </div>
+
+                <h1 class="text-5xl md:text-7xl font-bold leading-tight">
+                    Master your <br />
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#5161cf] to-purple-400">
+                        Future Today.
+                    </span>
+                </h1>
+                
+                <p class="text-zinc-400 text-lg max-w-md leading-relaxed">
+                    The all-in-one platform for seamless quizzes, resource sharing, and deep performance analytics for teachers and students.
+                </p>
+
+                <div class="flex gap-4 pt-4">
+                    <button class="px-8 py-4 rounded-xl font-semibold text-white bg-brand flex items-center gap-2 hover:-translate-y-1 transition-transform shadow-lg shadow-brand/25">
+                        Start Learning <i class="ph ph-arrow-right"></i>
+                    </button>
+                    <button class="px-8 py-4 rounded-xl font-semibold text-zinc-300 border border-zinc-800 hover:bg-zinc-900 transition-colors">
+                        View Demo
+                    </button>
+                </div>
+            </div>
+
+            <div class="perspective-container relative mt-12 lg:mt-0">
+                <div class="float-3d bg-zinc-900/80 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-2xl relative z-20">
+                    
+                    <div class="flex items-center justify-between mb-6 border-b border-white/5 pb-4">
+                        <div>
+                            <h3 class="text-lg font-semibold text-white">Student Performance</h3>
+                            <p class="text-xs text-zinc-500">Weekly Analysis</p>
+                        </div>
+                        <i class="ph ph-chart-bar text-brand text-2xl"></i>
+                    </div>
+
+                    <div class="flex items-end justify-between gap-2 h-48 mb-4 px-2">
+                        <div class="w-full bg-zinc-800 rounded-t-md relative h-full flex items-end">
+                            <div class="w-full bg-zinc-700 rounded-t-md grow-bar" style="--h: 40%"></div>
+                        </div>
+                        <div class="w-full bg-zinc-800 rounded-t-md relative h-full flex items-end">
+                            <div class="w-full bg-zinc-700 rounded-t-md grow-bar" style="--h: 70%; animation-delay: 0.1s"></div>
+                        </div>
+                         <div class="w-full bg-zinc-800 rounded-t-md relative h-full flex items-end">
+                            <div class="w-full bg-zinc-700 rounded-t-md grow-bar" style="--h: 50%; animation-delay: 0.2s"></div>
+                        </div>
+                        <div class="w-full bg-zinc-800 rounded-t-md relative h-full flex items-end">
+                            <div class="w-full bg-brand rounded-t-md grow-bar shadow-[0_0_20px_rgba(81,97,207,0.4)]" style="--h: 90%; animation-delay: 0.3s"></div>
+                        </div>
+                        <div class="w-full bg-zinc-800 rounded-t-md relative h-full flex items-end">
+                            <div class="w-full bg-zinc-700 rounded-t-md grow-bar" style="--h: 65%; animation-delay: 0.4s"></div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between text-xs text-zinc-500 font-mono">
+                        <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span>
+                    </div>
+
+                    <div class="absolute -right-6 -top-6 bg-[#1a1a1e] border border-brand/30 p-4 rounded-xl shadow-xl animate-bounce" style="animation-duration: 4s;">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full flex items-center justify-center bg-brand/20 text-brand">
+                                <i class="ph-fill ph-check-circle text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-zinc-400">Last Quiz</p>
+                                <p class="text-lg font-bold text-white">98%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="absolute inset-0 bg-brand blur-[80px] opacity-20 -z-10 rounded-full"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 border-t border-white/5 bg-[#0c0c0e]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Everything you need to excel</h2>
+                <p class="text-zinc-400 max-w-2xl mx-auto">Bridging the gap between classroom teaching and digital analysis.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="group p-8 rounded-2xl bg-zinc-900/50 border border-white/5 hover:border-brand/50 transition-all hover:bg-zinc-900/80 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-brand/10 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-110"></div>
+                    <div class="w-12 h-12 rounded-lg bg-zinc-800 flex items-center justify-center mb-6 group-hover:bg-brand transition-colors text-white">
+                        <i class="ph ph-brain text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Smart Quizzes</h3>
+                    <p class="text-zinc-400 text-sm leading-relaxed">
+                        Teachers create AI-assisted quizzes. Students attempt them in a distraction-free environment with auto-grading.
+                    </p>
+                </div>
+
+                <div class="group p-8 rounded-2xl bg-zinc-900/50 border border-white/5 hover:border-brand/50 transition-all hover:bg-zinc-900/80 relative overflow-hidden">
+                    <div class="w-12 h-12 rounded-lg bg-zinc-800 flex items-center justify-center mb-6 group-hover:bg-brand transition-colors text-white">
+                        <i class="ph ph-share-network text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Resource Sharing</h3>
+                    <p class="text-zinc-400 text-sm leading-relaxed">
+                        Seamlessly upload and share lecture notes, PDFs, and recorded sessions directly to specific classrooms.
+                    </p>
+                </div>
+
+                <div class="group p-8 rounded-2xl bg-zinc-900/50 border border-white/5 hover:border-brand/50 transition-all hover:bg-zinc-900/80 relative overflow-hidden">
+                    <div class="w-12 h-12 rounded-lg bg-zinc-800 flex items-center justify-center mb-6 group-hover:bg-brand transition-colors text-white">
+                        <i class="ph ph-chart-line-up text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Deep Analytics</h3>
+                    <p class="text-zinc-400 text-sm leading-relaxed">
+                        Visual graphs for students to track progress over time. Teachers get class-average reports instantly.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="border-t border-white/5 bg-black py-12">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-8">
+            <div class="col-span-1 md:col-span-2">
+                <div class="flex items-center gap-2 font-bold text-xl mb-4">
+                    <i class="ph ph-layers text-brand text-2xl"></i>
+                    <span>EduNexus</span>
+                </div>
+                <p class="text-zinc-500 text-sm max-w-xs">
+                    Empowering the next generation of learners with data-driven education tools.
+                </p>
+            </div>
+            
+            <div>
+                <h4 class="font-bold mb-4 text-white">Platform</h4>
+                <ul class="space-y-2 text-sm text-zinc-500">
+                    <li class="hover:text-brand cursor-pointer transition-colors">Quiz Maker</li>
+                    <li class="hover:text-brand cursor-pointer transition-colors">Analytics</li>
+                    <li class="hover:text-brand cursor-pointer transition-colors">Note Sharing</li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bold mb-4 text-white">Legal</h4>
+                <ul class="space-y-2 text-sm text-zinc-500">
+                    <li class="hover:text-brand cursor-pointer transition-colors">Privacy Policy</li>
+                    <li class="hover:text-brand cursor-pointer transition-colors">Terms of Service</li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 mt-12 pt-8 border-t border-white/5 text-center text-zinc-600 text-xs">
+            © 2024 EduNexus Inc. All rights reserved.
+        </div>
+    </footer>
+
+</body>
+</html>

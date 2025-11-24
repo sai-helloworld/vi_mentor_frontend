@@ -1,99 +1,16 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Create Quiz</title>
-  <style>
-    body { font-family: Arial; padding: 20px; }
-    label { display: block; margin-top: 10px; }
-    input, textarea, select, button { width: 100%; padding: 8px; margin-top: 5px; }
-    .success { color: green; margin-top: 10px; }
-    .error { color: red; margin-top: 10px; }
-  </style>
-</head>
-<body>
-  <h2>Create a New Quiz</h2>
-  <form id="quizForm">
-    <label>Title</label>
-    <input type="text" id="title" required />
-
-    <label>Description</label>
-    <textarea id="description" required></textarea>
-
-    <label>Teacher ID</label>
-    <input type="number" id="teacher_id" required />
-
-    <label>Subject ID</label>
-    <input type="number" id="subject_id" required />
-
-    <label>Section ID</label>
-    <input type="number" id="section_id" required />
-
-    <button type="submit">Create Quiz</button>
-  </form>
-
-  <div id="response" class="success" style="display: none;"></div>
-  <div id="error" class="error" style="display: none;"></div>
-
-  <script>
-    const form = document.getElementById("quizForm");
-    const responseBox = document.getElementById("response");
-    const errorBox = document.getElementById("error");
-
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      responseBox.style.display = "none";
-      errorBox.style.display = "none";
-
-      const payload = {
-        title: document.getElementById("title").value,
-        description: document.getElementById("description").value,
-        teacher_id: parseInt(document.getElementById("teacher_id").value),
-        subject_id: parseInt(document.getElementById("subject_id").value),
-        section_id: parseInt(document.getElementById("section_id").value),
-      };
-
-      try {
-        const res = await fetch("http://localhost:8000/api/quiz/create/", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
-
-        const result = await res.json();
-
-        if (res.ok) {
-          responseBox.textContent = `✅ Quiz created! ID: ${result.quiz_id}`;
-          responseBox.style.display = "block";
-          form.reset();
-        } else {
-          errorBox.textContent = result.error || "Something went wrong.";
-          errorBox.style.display = "block";
-        }
-      } catch (err) {
-        errorBox.textContent = "Server error. Please try again.";
-        errorBox.style.display = "block";
-      }
-    });
-  </script>
-</body>
-</html> -->
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <title>Create Quiz with Questions</title>
   <style>
-    body { font-family: Arial; padding: 20px; }
+    body { font-family: Arial; padding: 20px; background-color: black;color: white; }
     label { display: block; margin-top: 10px; }
     input, textarea, select, button { width: 100%; padding: 8px; margin-top: 5px; }
     .question-block { border: 1px solid #ccc; padding: 10px; margin-top: 15px; }
     .success { color: green; margin-top: 10px; }
     .error { color: red; margin-top: 10px; }
+    *{background-color: black;color:white}
   </style>
 </head>
 <body>
