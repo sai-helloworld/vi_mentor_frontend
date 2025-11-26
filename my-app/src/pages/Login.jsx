@@ -38,6 +38,14 @@
 //         setIsAuthenticated(true);
 //         setRole(localRole);
 //         setEmail(emailInput);
+
+//         // ✅ Store roll_number for student, teacher_id for faculty
+//         if (localRole === "student" && result.roll_number) {
+//           localStorage.setItem("student_roll_number", result.roll_number);
+//         } else if (localRole === "faculty" && result.teacher_id) {
+//           localStorage.setItem("teacher_id", result.teacher_id);
+//         }
+
 //         navigate("/");
 //       } else {
 //         setLoginError(result.error || "Login failed");
@@ -103,9 +111,22 @@ export default function Login({ setIsAuthenticated, setRole, setEmail }) {
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [loginError, setLoginError] = useState("");
+  
+  // --- Notification State ---
+  const [toast, setToast] = useState({ show: false, message: "", type: "error" }); // Added 'type' for color
+
   const navigate = useNavigate();
 
   const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  // --- Helper: Show Toast ---
+  const showToast = (message, type = "error") => {
+    setToast({ show: true, message, type });
+    // Auto hide after 3 seconds
+    setTimeout(() => {
+      setToast((prev) => ({ ...prev, show: false }));
+    }, 3000);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -131,28 +152,53 @@ export default function Login({ setIsAuthenticated, setRole, setEmail }) {
       const result = await response.json();
 
       if (response.ok) {
-        setIsAuthenticated(true);
-        setRole(localRole);
-        setEmail(emailInput);
+        // 1. Show Success Notification
+        showToast("Login Successful! Redirecting...", "success");
 
-        // ✅ Store roll_number for student, teacher_id for faculty
-        if (localRole === "student" && result.roll_number) {
-          localStorage.setItem("student_roll_number", result.roll_number);
-        } else if (localRole === "faculty" && result.teacher_id) {
-          localStorage.setItem("teacher_id", result.teacher_id);
-        }
+        // 2. DELAY navigation so user sees the notification
+        setTimeout(() => {
+          setIsAuthenticated(true);
+          setRole(localRole);
+          setEmail(emailInput);
 
-        navigate("/");
+          if (localRole === "student" && result.roll_number) {
+            localStorage.setItem("student_roll_number", result.roll_number);
+          } else if (localRole === "faculty" && result.teacher_id) {
+            localStorage.setItem("teacher_id", result.teacher_id);
+          }
+
+          navigate("/");
+        }, 1500); // 1.5 second delay
+
       } else {
+        // Show Error Notification immediately
         setLoginError(result.error || "Login failed");
+        showToast(result.error || "Login Failed", "error");
       }
     } catch {
-      setLoginError("Server error. Please try again later.");
+      const errorMsg = "Server error. Please try again later.";
+      setLoginError(errorMsg);
+      showToast(errorMsg, "error");
     }
   };
 
   return (
     <div className="login-wrapper">
+      
+      {/* --- Notification Component --- */}
+      <div className={`toast-notification ${toast.type} ${toast.show ? "show" : ""}`}>
+        <div className="toast-content">
+          <i className={toast.type === "success" ? "fas fa-check-circle" : "fas fa-exclamation-triangle"}></i>
+          <span>{toast.message}</span>
+        </div>
+        <button 
+          className="toast-close" 
+          onClick={() => setToast((prev) => ({ ...prev, show: false }))}
+        >
+          <i className="fas fa-times"></i>
+        </button>
+      </div>
+
       <div className="login-form">
         <button className="close-btn" onClick={() => navigate("/")} type="button">
           &times;

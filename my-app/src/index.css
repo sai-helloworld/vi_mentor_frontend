@@ -149,7 +149,93 @@ body{font-family: "Roboto", sans-serif;
     display: none;
   }
 }
+/* --- Modern Toast Notification --- */
+.toast-notification {
+  position: fixed;
+  top: 90px; /* Lowered slightly so it doesn't cover the Navbar */
+  right: 20px;
+  
+  /* Glassmorphism Gradient Background */
+  /* background: linear-gradient(135deg, rgba(255, 65, 108, 0.95), rgba(255, 75, 43, 0.95)); */
+  border: solid 1px red;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  
+  color: white;
+  padding: 16px 24px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(255, 0, 60, 0.553); /* Colored shadow glow */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+  
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  min-width: 320px;
+  z-index: 10000;
+  
+  /* Initial State (Hidden) */
+  opacity: 0;
+  transform: translateX(120%) scale(0.95); /* Start off-screen and slightly smaller */
+  
+  /* Transition for EXITING (Smooth and fast) */
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  pointer-events: none; 
+}
 
+/* --- Active State (Visible) --- */
+.toast-notification.show {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+  pointer-events: auto;
+  
+  /* Transition for ENTERING (Bouncy/Spring Effect) */
+  /* This bezier curve creates the "overshoot" bounce effect */
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.toast-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: "Segoe UI", sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+}
+
+.toast-content i {
+  font-size: 18px;
+  /* Make the icon pulse slightly */
+  animation: pulseIcon 2s infinite;
+}
+
+.toast-close {
+  background: rgba(0,0,0,0.1);
+  border: none;
+  color: white;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  transition: all 0.2s ease;
+}
+
+.toast-close:hover {
+  background: rgba(0,0,0,0.3);
+  transform: rotate(90deg); /* Spin effect on hover */
+}
+
+/* Optional: Icon Pulse Animation */
+@keyframes pulseIcon {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
 /* login-page */
 .login-logout {
   align-content: center;
@@ -241,6 +327,32 @@ body{font-family: "Roboto", sans-serif;
 
 .role-buttons button:hover {
   background-color: #0056b3;
+}
+.toast-notification.success {
+  /* background: linear-gradient(135deg, #00b09b, #96c93d);  */
+  border: solid 2px linear-gradient(135deg, #00b09b, #96c93d);
+  box-shadow: 0 10px 30px rgba(0, 176, 155, 0.4); /* Green Glow */
+}
+.logout-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000; /* Matches your body bg */
+  color: white;
+}
+
+.logout-text h2 {
+  font-family: "Segoe UI", sans-serif;
+  font-size: 2rem;
+  opacity: 0.7;
+  animation: breathe 2s infinite ease-in-out;
+}
+
+/* Make the text pulse gently */
+@keyframes breathe {
+  0%, 100% { opacity: 0.5; transform: scale(0.95); }
+  50% { opacity: 1; transform: scale(1); }
 }
 /* src/index.css */
 @keyframes float {

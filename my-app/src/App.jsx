@@ -55,8 +55,10 @@ import SendNotes from "./pages/SendNotes"
 import Quizes from "./pages/Quizes";
 import AttemptQuiz from "./pages/AttemptQuiz";   // ✅ new page for students
 import Charts from "./pages/Charts";
+import About from "./pages/about"
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
+
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -89,6 +91,7 @@ function App() {
         />
 
         <Route path="/charts" element={<Charts />} />
+        <Route path="/about" element={<About/>}/>
         <Route
           path="/login"
           element={
