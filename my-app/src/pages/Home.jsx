@@ -152,7 +152,7 @@ const Home = () => {
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center gap-2 font-bold text-xl mb-4">
               <Layers size={20} className="text-[#5161cf]" />
-              <span>EduNexus</span>
+              <span>Vi Mentor</span>
             </div>
             <p className="text-zinc-500 text-sm max-w-xs">
               Empowering the next generation of learners with data-driven education tools.
@@ -163,7 +163,7 @@ const Home = () => {
           <FooterColumn title="Legal" links={['Privacy Policy', 'Terms of Service']} hoverColor={theme.brand} />
         </div>
         <div className="max-w-7xl mx-auto px-6 mt-12 pt-8 border-t border-white/5 text-center text-zinc-600 text-xs">
-          © 2024 EduNexus Inc. All rights reserved.
+          © 2024 Vi Mentor Inc. All rights reserved.
         </div>
       </footer>
     </div>
