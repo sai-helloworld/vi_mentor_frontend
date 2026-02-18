@@ -54,6 +54,7 @@ import Notes from "./pages/Notes";
 import SendNotes from "./pages/SendNotes"
 import Quizes from "./pages/Quizes";
 import AttemptQuiz from "./pages/AttemptQuiz";   // ✅ new page for students
+import Student_Charts from "./pages/Student_charts";
 import Charts from "./pages/Charts";
 import About from "./pages/about"
 import Login from "./pages/Login";
@@ -83,14 +84,16 @@ function App() {
           path="/quizes"
           element={
             role === "student" ? (
-              <AttemptQuiz email={email} />
+              <AttemptQuiz email={email} studentId = '22A91A05G1' />
             ) : (
               <Quizes role={role} email={email} />
             )
           }
         />
 
-        <Route path="/charts" element={<Charts />} />
+        <Route path="/charts" element={
+          role === "student"?(<Student_Charts/>):(<Charts/>)
+        } />
         <Route path="/about" element={<About/>}/>
         <Route
           path="/login"
