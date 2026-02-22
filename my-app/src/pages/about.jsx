@@ -104,7 +104,7 @@ const About = () => {
               name="Sai Pavan Middela"
               role="Lead Architect"
               image="https://api.dicebear.com/9.x/miniavs/svg?seed=Maria"
-              tags={['React', 'Node.js', 'GraphQL']}
+              tags={['React.js', 'mySQL', 'Django']}
               stats={[
                 { label: 'Commits', val: 92 },
                 { label: 'Coffee', val: 100 },
