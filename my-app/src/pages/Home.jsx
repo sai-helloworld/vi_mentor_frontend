@@ -198,6 +198,7 @@
 
 
 import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from "react-router-dom";
 import { 
   Layers, 
   ArrowRight, 
@@ -450,9 +451,10 @@ const Home = () => {
                 The all-in-one platform for seamless quizzes, resource sharing, and deep performance analytics for teachers and students.
               </p>
               <div className="flex gap-4 pt-4">
-                <button className="px-8 py-4 rounded-xl font-semibold text-white flex items-center gap-2 hover:-translate-y-1 transition-transform shadow-lg shadow-[#5161cf]/25" style={{ backgroundColor: theme.brand }}>
-                  Start Learning <ArrowRight size={18} />
-                </button>
+                
+                            <Link to="/login" className=" px-8 py-4 rounded-xl font-semibold text-white flex items-center gap-2 hover:-translate-y-1 transition-transform shadow-lg shadow-[#5161cf]/25" style={{ backgroundColor: theme.brand }}>Start Learning <ArrowRight size={18} /></Link>
+
+                
               </div>
             </div>
 
