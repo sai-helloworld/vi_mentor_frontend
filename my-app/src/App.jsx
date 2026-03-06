@@ -50,6 +50,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AnimatedNavbar from "./components/AnimatedNavbar";
 import Home from "./pages/Home";
 import ChatBot from "./pages/ChatBot";
+import TeacherChatBot from "./pages/TeacherChatBot"
 import Notes from "./pages/Notes";
 import SendNotes from "./pages/SendNotes"
 import Quizes from "./pages/Quizes";
@@ -71,7 +72,12 @@ function App() {
       <AnimatedNavbar isAuthenticated={isAuthenticated} />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/chatbot" element={<ChatBot />} />
+        <Route path="/chatbot" element={
+          role == "student" ?(
+          <ChatBot />
+          ):(
+            <TeacherChatBot/>
+          )} />
         <Route path="/notes" element={
           role == "student" ?(
           <Notes />
