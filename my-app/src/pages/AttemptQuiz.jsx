@@ -363,7 +363,8 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import "../styles/quiz-attempt-full.css"; // CSS file provided below
 
-export default function QuizAttempt({ studentId }) {
+export default function QuizAttempt( ) {
+  const studentId = localStorage.getItem('student_roll_number')
   const [pendingQuizzes, setPendingQuizzes] = useState([]);
   const [loadingQuizzes, setLoadingQuizzes] = useState(true);
   const [error, setError] = useState(null);

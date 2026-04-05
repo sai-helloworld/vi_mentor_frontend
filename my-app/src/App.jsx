@@ -90,7 +90,7 @@ function App() {
           path="/quizes"
           element={
             role === "student" ? (
-              <AttemptQuiz email={email} studentId = '22A91A05G1' />
+              <AttemptQuiz email={email} />
             ) : (
               <Quizes role={role} email={email} />
             )
